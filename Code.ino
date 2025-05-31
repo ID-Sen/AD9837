@@ -1,37 +1,36 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "spi.h"
+#include <SPI.h> // Include the Arduino SPI library
 
 // Define the reset pin (replace with your actual pin number)
 #define AD9837_RESET_PIN 5
 
 void AD9837_Init(void) {
-    GPIO_SetPinLow(AD9837_RESET_PIN);
-    Delay(10);
-    GPIO_SetPinHigh(AD9837_RESET_PIN);
+    pinMode(AD9837_RESET_PIN, OUTPUT); // Set the reset pin as an output
+    digitalWrite(AD9837_RESET_PIN, LOW); // Set reset low
+    delay(10); // Wait for 10 milliseconds
+    digitalWrite(AD9837_RESET_PIN, HIGH); // Set reset high
 }
 
 void AD9837_SetFrequency(void) {
     // Control Register: Reset enabled
-    SPI_Transmit(0x2100);
+    SPI.transfer(0x2100);
     // Frequency Register 0 LSB
-    SPI_Transmit(0x4000);
+    SPI.transfer(0x4000);
     // Frequency Register 0 MSB
-    SPI_Transmit(0x6800);
+    SPI.transfer(0x6800);
     // Phase Register 0
-    SPI_Transmit(0xC000);
+    SPI.transfer(0xC000);
     // Control Register: Exit reset
-    SPI_Transmit(0x2000);
+    SPI.transfer(0x2000);
 }
 
-int main(void) {
-    SPI_Init();
-    AD9837_Init();
-    AD9837_SetFrequency();
-    
-    while (1) {
-        // Main loop
-    }
+void setup() {
+    SPI.begin(); // Initialize the SPI library
+    AD9837_Init(); // Initialize the AD9837
+    AD9837_SetFrequency(); // Set the frequency
+}
 
-    return 0;
+void loop() {
+    // Main loop (empty for now)
 }
