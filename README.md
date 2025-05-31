@@ -1,5 +1,6 @@
 # AD9837
 AD9837 Product Page- https://www.analog.com/en/products/ad9837.html
+To generate 10MHz clock from AD9837.
 RESET bit should be set to 1 until the part is ready to begin generating an output.
 The RESET bit should then be set to 0 to begin generating an output.
 
