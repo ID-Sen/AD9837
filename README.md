@@ -8,11 +8,7 @@ Connect the reset pin to a GPIO pin on the microcontroller.
 Provide power and ground connections to the AD9837.
 
 0x2100  Control Register
-
 0x4000 Frequency Register 0 LSB
-
 0x6800 Frequency Register 0 MSB
-
 0xC000 Phase Register 0
-
 0x2000 Exit Reset
